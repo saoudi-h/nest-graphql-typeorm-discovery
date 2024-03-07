@@ -24,7 +24,7 @@ import { CurrencyModule } from './currency/currency.module';
       autoSchemaFile: true,
       formatError: (error) => {
         const graphQLFormattedError = {
-          message: error.message
+          message: error.message,
         };
         return graphQLFormattedError;
       },
