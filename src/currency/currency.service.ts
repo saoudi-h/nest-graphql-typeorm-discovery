@@ -45,8 +45,15 @@ export class CurrencyService {
   }
 
   async createCurrency(name: string, rate: number): Promise<Currency> {
-    const newCurrency = this.currencyRepository.create({ name, rate });
-    return this.currencyRepository.save(newCurrency);
+    try {
+      const newCurrency = this.currencyRepository.create({ name, rate });
+      return await this.currencyRepository.save(newCurrency);
+    } catch (error) {
+      if (error.code === '23505') {
+        throw new Error('Une monnaie avec ce nom existe déjà.');
+      }
+      throw error;
+    }
   }
 
   async getCurrencies(): Promise<Currency[]> {

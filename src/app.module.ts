@@ -22,6 +22,12 @@ import { CurrencyModule } from './currency/currency.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      formatError: (error) => {
+        const graphQLFormattedError = {
+          message: error.message
+        };
+        return graphQLFormattedError;
+      },
     }),
     CurrencyModule,
   ],

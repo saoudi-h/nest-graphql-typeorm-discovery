@@ -1,18 +1,18 @@
 import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@ObjectType() // Décorateur GraphQL pour définir un type d'objet
-@Entity() // Décorateur TypeORM pour définir une entité
+@ObjectType()
+@Entity()
 export class Currency {
-  @Field(() => ID) // Décorateur GraphQL pour exposer ce champ dans le schéma GraphQL
-  @PrimaryGeneratedColumn() // Décorateur TypeORM pour une colonne d'ID auto-générée
+  @Field(() => ID)
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Field() // Décorateur GraphQL pour exposer ce champ
-  @Column() // Décorateur TypeORM pour une colonne standard
+  @Field()
+  @Column({ unique: true })
   name: string;
 
-  @Field(() => Float) // Indique à GraphQL que ce champ est un Float
-  @Column('float') // Type de colonne spécifique pour TypeORM
+  @Field(() => Float)
+  @Column('float')
   rate: number;
 }
