@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { Currency } from './currency/currency.entity';
+import { CurrencyModule } from './currency/currency.module';
 
 @Module({
   imports: [
@@ -14,13 +16,14 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       username: 'postgres',
       password: 'admin',
       database: 'nest-graphql-typeorm-discovery',
-      entities: [],
+      entities: [Currency],
       synchronize: true,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
+    CurrencyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
